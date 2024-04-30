@@ -1,0 +1,9 @@
+[package]
+name = "sigfig"
+version = "0.0.1"
+entrypoint = "lib.typ"
+authors = ["OverflowCat"]
+license = "MIT"
+description = "Typst library for rounding numbers"
+disciplines = ["engineering"]
+keywords = ["numbers", "sigfig", "uncertainty"]
