@@ -1,3 +1,5 @@
+#let getHighest(num) = calc.floor(calc.log(num))
+
 #let toPrecision(x, p) = {
   if type(p) != int {
     return x
@@ -17,7 +19,7 @@
     m = "0" * p 
     e = 0
   } else {
-    e = calc.floor(calc.log(x))
+    e = getHighest(x)
     let n = calc.round(x / calc.pow(10, e - p + 1))
     m = str(n)
 
@@ -49,4 +51,15 @@
     "0." + "0" * (-(e + 1)) + m
   }
   return s + m
+}
+
+#let withUncertainty(n, u) = {
+  let e_u = getHighest(u)
+  let e_n = getHighest(n)
+  assert(e_u >= 0 and e_n >= 0)
+  assert(e_u <= e_n)
+  let sigfig = e_n - e_u + 1
+  let uncertainty = toPrecision(u, 1)
+  let value = toPrecision(n, sigfig)
+  value + "+-" + uncertainty
 }
