@@ -75,7 +75,7 @@
     let uncertainty = calc.round(u / calc.pow(10, e_u)) * calc.pow(10, e_u - e_n)
     splitted.at(0) + "+-" + str(uncertainty) + "e" + splitted.at(1)
   } else {
-    let uncertainty = u 
+    let uncertainty = round(u, 1)
     value + "+-" + str(uncertainty)
   }
 }
