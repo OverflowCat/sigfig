@@ -1,6 +1,6 @@
 #let getHighest(num) = calc.floor(calc.log(num))
 
-#let toPrecision(x, p) = {
+#let round(x, p) = {
   if type(p) != int {
     return x
   }
@@ -16,7 +16,7 @@
   let m = ""
   let e = 0
   if x == 0 {
-    m = "0" * p 
+    m = "0" * p
     e = 0
   } else {
     e = getHighest(x)
@@ -30,7 +30,7 @@
         m = a + "." + b
       }
       let c = if e > 0 {
-        "+"
+        "" // JS uses "+"
       } else {
         "-"
       }
@@ -53,13 +53,29 @@
   return s + m
 }
 
-#let withUncertainty(n, u) = {
+#let uround(n, u) = {
   let e_u = getHighest(u)
   let e_n = getHighest(n)
   assert(e_u >= 0 and e_n >= 0)
   assert(e_u <= e_n)
   let sigfig = e_n - e_u + 1
-  let uncertainty = toPrecision(u, 1)
-  let value = toPrecision(n, sigfig)
+  let uncertainty = round(u, 1)
+  let value = round(n, sigfig)
   value + "+-" + uncertainty
+}
+
+#let urounds(n, u) = {
+  let e_u = getHighest(u)
+  let e_n = getHighest(n)
+  let sigfig = e_n - e_u + 1
+  let value = round(n, sigfig)
+
+  let splitted = value.split("e")
+  if splitted.len() == 2 {
+    let uncertainty = calc.round(u / calc.pow(10, e_u)) * calc.pow(10, e_u - e_n)
+    splitted.at(0) + "+-" + str(uncertainty) + "e" + splitted.at(1)
+  } else {
+    let uncertainty = u 
+    value + "+-" + str(uncertainty)
+  }
 }
