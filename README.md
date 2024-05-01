@@ -1,6 +1,23 @@
 # `sigfig`
 
-`sigfig` is a [Typst](https://typst.app/) package for rounding numbers with significant figures and uncertainty.
+`sigfig` is a [Typst](https://typst.app/) library for rounding numbers with [significant figures](https://en.wikipedia.org/wiki/Significant_figures) and [measurement uncertainty](https://en.wikipedia.org/wiki/Measurement_uncertainty).
+
+## Overview
+
+```typ
+#import "@preview/sigfig:0.1.0": round, urounds
+#import "@preview/unify:0.5.0": num
+
+$ #num(round(98654, 3)) $
+$ #num(round(2.8977729e-3, 4)) $
+$ #num(round(-.0999, 2)) $
+$ #num(urounds(114514.19, 1.98)) $
+$ #num(urounds(1234.5678, 0.096)) $
+```
+
+yields
+
+<img src="https://github.com/typst/packages/assets/20166026/f3d69c3c-bc67-484f-81f9-80a10913fd11" width="240px">
 
 ## Documentation
 
@@ -30,19 +47,8 @@ Note that what is different from the ES spec is that there will be no sign ($+$)
 
 `uround` rounds a number with its uncertainty, and returns a string of both with the same exponent, if any.
 
-You can use `unify` to display the result.
+You can use `num` in `unify` to display the result.
 
-```typ
-#import "@preview/sigfig:0.1.0": round, urounds
-#import "@preview/unify:0.5.0": num
+## License
 
-$ #num(round(98654, 3)) $
-$ #num(round(2.8977729e-3, 4)) $
-$ #num(round(-.0999, 2)) $
-$ #num(urounds(114514.19, 1.98)) $
-$ #num(urounds(1234.5678, 0.096)) $
-```
-
-yields
-
-<img src="https://github.com/typst/packages/assets/20166026/f3d69c3c-bc67-484f-81f9-80a10913fd11" width="240px">
+MIT © 2024 OverflowCat ([overflow.cat](https://about.overflow.cat)).
