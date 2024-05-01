@@ -1,7 +1,7 @@
 /**
 Returns the exponent of 10 for the first digit of a given number.
 */
-#let getHighest(x) = calc.floor(calc.log(x)) 
+#let getHighest(x) = calc.floor(calc.log(calc.abs(x)))
 
 /**
 Returns the first significant digit of a given positive number.
